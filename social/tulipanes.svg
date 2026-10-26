@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Nuestro primer mes juntos</title>
+  <desc>Ilustración original de tulipanes lavanda. Sin fotografías ni nombres personales.</desc>
+  <defs>
+    <radialGradient id="paper"><stop stop-color="#FFF9F6"/><stop offset="1" stop-color="#F1E6F4"/></radialGradient>
+    <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E9D5F5"/><stop offset=".55" stop-color="#C8A2C8"/><stop offset="1" stop-color="#9270A7"/></linearGradient>
+    <g id="tulip">
+      <path d="M0 185C15 130-8 80 0 12" fill="none" stroke="#879775" stroke-width="5" stroke-linecap="round"/>
+      <path d="M4 143C-52 122-65 71-59 46C-12 68 9 104 4 143Z" fill="#A8B49B"/>
+      <path d="M6 113C50 97 71 60 69 35C25 58 9 79 6 113Z" fill="#BEC7AE"/>
+      <path d="M0 30C-51 23-66-30-42-75L-12-45L0-86L15-47L43-77C67-21 48 23 0 30Z" fill="url(#petal)" stroke="#AC8ABC" stroke-width="1.2"/>
+      <path d="M0 30C-32 19-39-10-24-42C0-23 14 7 0 30Z" fill="#DBBFE5"/>
+      <path d="M0 30C35 20 40-14 27-44C7-27-7 5 0 30Z" fill="#B08BC1"/>
+      <path d="M0 31C-19 20-17-6 0-22C23 2 21 23 0 31Z" fill="#E9D5F5"/>
+      <path d="M-41-61Q-48-8-20 11M42-60Q51-19 30-2" fill="none" stroke="#FFF9F6" stroke-opacity=".6" stroke-width="2"/>
+    </g>
+  </defs>
+  <rect width="1200" height="630" fill="url(#paper)"/>
+  <rect x="26" y="26" width="1148" height="578" rx="3" fill="none" stroke="#D8C5DF"/>
+  <circle cx="600" cy="284" r="183" fill="#FFF9F6" opacity=".72"/>
+  <g transform="translate(157 428) rotate(-15)"><use href="#tulip"/></g>
+  <g transform="translate(267 478) rotate(9) scale(.8)"><use href="#tulip"/></g>
+  <g transform="translate(1042 428) rotate(15) scale(-1 1)"><use href="#tulip"/></g>
+  <g transform="translate(935 478) rotate(-9) scale(-.8 .8)"><use href="#tulip"/></g>
+  <text x="600" y="258" text-anchor="middle" font-family="Georgia,serif" font-size="61" fill="#543A65">Nuestro primer</text>
+  <text x="600" y="337" text-anchor="middle" font-family="Georgia,serif" font-size="72" font-style="italic" fill="#896392">mes juntos</text>
+  <path d="M565 385H588M612 385H635" stroke="#C8A2C8"/>
+  <path d="M600 393S589 387 589 381C589 375 597 374 600 379C603 374 611 375 611 381C611 387 600 393 600 393Z" fill="#C8A2C8"/>
+</svg>

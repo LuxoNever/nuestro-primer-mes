@@ -1,0 +1,7 @@
+GSAP 3.15.0 and @gsap/react 2.1.2
+Copyright (c) GreenSock. All rights reserved.
+
+These packages declare the GSAP Standard 'no charge' license, not MIT.
+Official license: https://gsap.com/standard-license
+Official sources: https://github.com/greensock/GSAP and https://github.com/greensock/react
+This notice does not replace the license terms. Keep upstream copyright/license notices in the distributed code.
