@@ -1,16 +1,42 @@
 import { test, expect, type Page } from "@playwright/test";
 
+type GainRamp = { value: number; duration: number; mediaTime: number };
+type GainWrite = { value: number; mediaTime: number };
+
 async function observe(page: Page, native = false) {
   await page.addInitScript((nativeOnly) => {
-    const state = window as typeof window & { gains: GainNode[]; playGestures: boolean[] };
+    const state = window as typeof window & { gains: GainNode[]; playGestures: boolean[]; gainRamps: GainRamp[]; gainWrites: GainWrite[] };
     state.gains = [];
     state.playGestures = [];
+    state.gainRamps = [];
+    state.gainWrites = [];
+    const volume = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, "volume")!;
+    Object.defineProperty(HTMLMediaElement.prototype, "volume", {
+      ...volume,
+      set(value: number) {
+        state.gainWrites.push({ value, mediaTime: this.currentTime });
+        volume.set!.call(this, value);
+      },
+    });
     if (nativeOnly) Object.defineProperty(window, "AudioContext", { value: undefined });
     if (typeof AudioContext === "function") {
       const create = AudioContext.prototype.createGain;
       AudioContext.prototype.createGain = function () {
         const gain = create.call(this);
         state.gains.push(gain);
+        // Observe the real automation without replacing or simulating the audio.
+        // A short cross-process poll can miss the ramp on a Linux CI audio clock.
+        const ramp = gain.gain.linearRampToValueAtTime;
+        const set = gain.gain.setValueAtTime;
+        const contextTime = () => this.currentTime;
+        gain.gain.setValueAtTime = function (value, time) {
+          state.gainWrites.push({ value, mediaTime: document.querySelector("audio")?.currentTime ?? 0 });
+          return set.call(this, value, time);
+        };
+        gain.gain.linearRampToValueAtTime = function (value, end) {
+          state.gainRamps.push({ value, duration: end - contextTime(), mediaTime: document.querySelector("audio")?.currentTime ?? 0 });
+          return ramp.call(this, value, end);
+        };
         return gain;
       };
     }
@@ -90,9 +116,16 @@ test("sobre real: silencio en floración, reinicio y fundido en onReveal sin otr
   expect(reveal.length).toBeGreaterThan(0);
   expect(reveal[0].time).toBeGreaterThanOrEqual(0.85);
   expect(reveal[0].time).toBeLessThan(1.3);
-  expect(reveal.some(s => s.level > 0 && s.level < 0.30)).toBe(true);
-  // The separate intro ramp must still be rising after the normal 0.35 s loop fade.
-  expect(samples.some(s => s.phase === "leaving" && s.time > 1.35 && s.time < 1.6 && s.level > 0.08 && s.level < 0.25)).toBe(true);
+  const ramps = await page.evaluate(() => (window as typeof window & { gainRamps: GainRamp[] }).gainRamps);
+  const writes = await page.evaluate(() => (window as typeof window & { gainWrites: GainWrite[] }).gainWrites);
+  // Require an actual scheduled ramp substantially longer than the 0.35 s loop
+  // fade. Combined with silence before rewind and final gain, this validates the
+  // 1.2 s reveal fade without depending on sampling one particular render frame.
+  if (await page.evaluate(() => (window as typeof window & { gains: GainNode[] }).gains.length))
+    expect(ramps.some(ramp => Math.abs(ramp.value - 0.35) < 0.001 && ramp.mediaTime >= 0.85 && ramp.mediaTime < 1.4 && ramp.duration > 0.6 && ramp.duration <= 1.21), JSON.stringify(ramps)).toBe(true);
+  // WebKit builds without Web Audio use the native volume path instead. In both
+  // paths require a real intermediate write consistent with the 1.2 s envelope.
+  expect(writes.some(write => write.mediaTime >= 1.15 && write.mediaTime < 1.8 && Math.abs(write.value - 0.35 * (write.mediaTime - 0.85) / 1.2) < 0.025), JSON.stringify(writes)).toBe(true);
   expect(await page.evaluate(() => (window as typeof window & { playGestures: boolean[] }).playGestures)).toEqual([true]);
   expect(await page.evaluate(() => (window as typeof window & { gains: GainNode[] }).gains.length)).toBeLessThanOrEqual(1);
   await expect(page.locator("audio")).toHaveCount(1);

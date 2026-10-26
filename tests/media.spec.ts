@@ -1,7 +1,10 @@
 import { test, expect } from "@playwright/test";
 
 function silentWav() {
-  const buffer = Buffer.alloc(44 + 16000);
+  // This test checks controls, not short-file looping. Leave enough playback
+  // time for WebKit/GStreamer and a loaded CI runner to operate the slider.
+  const dataBytes = 16000 * 30;
+  const buffer = Buffer.alloc(44 + dataBytes);
   buffer.write("RIFF", 0);
   buffer.writeUInt32LE(buffer.length - 8, 4);
   buffer.write("WAVEfmt ", 8);
@@ -13,7 +16,7 @@ function silentWav() {
   buffer.writeUInt16LE(2, 32);
   buffer.writeUInt16LE(16, 34);
   buffer.write("data", 36);
-  buffer.writeUInt32LE(16000, 40);
+  buffer.writeUInt32LE(dataBytes, 40);
   return buffer;
 }
 

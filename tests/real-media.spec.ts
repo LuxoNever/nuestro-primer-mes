@@ -74,13 +74,32 @@ test("MP4 real: gesto, continuidad entre intro y página, volumen, mute, pausa y
   page,
 }) => {
   await page.addInitScript(() => {
-    const state = window as typeof window & { testGains: GainNode[] };
+    const state = window as typeof window & { testGains: GainNode[]; testAutomation: { value: number; mediaTime: number }[] };
     state.testGains = [];
+    state.testAutomation = [];
+    const volume = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, "volume")!;
+    Object.defineProperty(HTMLMediaElement.prototype, "volume", {
+      ...volume,
+      set(value: number) {
+        state.testAutomation.push({ value, mediaTime: this.currentTime });
+        volume.set!.call(this, value);
+      },
+    });
     if (!("AudioContext" in window)) return;
     const original = AudioContext.prototype.createGain;
     AudioContext.prototype.createGain = function () {
       const gain = original.call(this);
       state.testGains.push(gain);
+      const set = gain.gain.setValueAtTime;
+      const ramp = gain.gain.linearRampToValueAtTime;
+      gain.gain.setValueAtTime = function (value, time) {
+        state.testAutomation.push({ value, mediaTime: document.querySelector("audio")?.currentTime ?? 0 });
+        return set.call(this, value, time);
+      };
+      gain.gain.linearRampToValueAtTime = function (value, time) {
+        state.testAutomation.push({ value, mediaTime: document.querySelector("audio")?.currentTime ?? 0 });
+        return ramp.call(this, value, time);
+      };
       return gain;
     };
   });
@@ -129,9 +148,14 @@ test("MP4 real: gesto, continuidad entre intro y página, volumen, mute, pausa y
   await expect.poll(gain).toBeCloseTo(0.7, 2);
   for (let i = 0; i < 2; i++) {
     await audio.evaluate((a: HTMLAudioElement) => {
+      (window as typeof window & { testAutomation: { value: number; mediaTime: number }[] }).testAutomation = [];
       a.currentTime = 199.55;
     });
-    await expect.poll(gain, { intervals: [30] }).toBeLessThan(0.65);
+    // Retain the real gain operations so the short end fade cannot fall between
+    // two Playwright round trips. Every operation still reaches the native API.
+    await expect.poll(() => page.evaluate(() =>
+      (window as typeof window & { testAutomation: { value: number; mediaTime: number }[] }).testAutomation.some(step => step.mediaTime >= 199.4 && step.value < 0.65),
+    )).toBe(true);
     await expect
       .poll(() => audio.evaluate((a: HTMLAudioElement) => a.currentTime), {
         intervals: [80],
