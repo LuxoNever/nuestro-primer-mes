@@ -149,7 +149,8 @@ test("MP4 real: gesto, continuidad entre intro y página, volumen, mute, pausa y
   for (let i = 0; i < 2; i++) {
     await audio.evaluate((a: HTMLAudioElement) => {
       (window as typeof window & { testAutomation: { value: number; mediaTime: number }[] }).testAutomation = [];
-      a.currentTime = 199.55;
+      // Seek before the fade so codec seek granularity cannot skip its window.
+      a.currentTime = 198;
     });
     // Retain the real gain operations so the short end fade cannot fall between
     // two Playwright round trips. Every operation still reaches the native API.

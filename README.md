@@ -185,7 +185,7 @@ scripts/capture-demo.mjs     Capturas y videos reproducibles
 
 Consulta `INFORME.md` para los resultados y pendientes. Playwright comprueba Chromium, emulación móvil Chrome y emulación iPhone con WebKit; esto **no equivale** a probar teléfonos físicos.
 
-WebKit en este Windows rechaza el WAV PCM de prueba con `MEDIA_ERR_SRC_NOT_SUPPORTED`, también en una reproducción aislada. Solo esa prueba se omite en WebKit/Windows; las demás se ejecutan. El archivo MP4 real se prueba en Chromium escritorio, Chrome móvil y WebKit móvil emulados, incluidos volumen, mute y dos reinicios del bucle. La omisión afecta solo al fixture WAV antiguo. Actions en Linux no tiene esa exclusión. Hay que comprobar la canción definitiva en un iPhone real. [Playwright explica las diferencias de códecs por sistema operativo](https://playwright.dev/docs/browsers#webkit).
+WebKit en este Windows rechaza el WAV PCM de prueba con `MEDIA_ERR_SRC_NOT_SUPPORTED`, también en una reproducción aislada. Solo esa prueba se omite en WebKit/Windows; las demás se ejecutan. El archivo MP4 real se prueba en Chromium escritorio, Chrome móvil y WebKit móvil emulados, incluidos volumen, mute y dos reinicios del bucle. La omisión afecta solo al fixture WAV antiguo. Actions ejecuta la suite completa en macOS, con una pila de reproducción más cercana a Safari y sin esa exclusión; el trabajo de despliegue sigue en Ubuntu. Hay que comprobar la canción definitiva en un iPhone real. [Playwright explica las diferencias de códecs por sistema operativo](https://playwright.dev/docs/browsers#webkit).
 
 ## Referencias y autoría
 
