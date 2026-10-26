@@ -1,0 +1,5 @@
+# Preserve the audited source and personal media bytes across Windows/Linux.
+src/** -text
+public/photos/** -text
+public/audio/** -text
+package-lock.json -text

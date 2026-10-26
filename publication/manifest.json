@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "repository": "nuestro-primer-mes",
+  "base": "/nuestro-primer-mes/",
+  "siteUrl": "https://luxonever.github.io/nuestro-primer-mes/",
+  "authorization": {
+    "repositoryCreation": true,
+    "remoteUpload": true,
+    "publicSite": true,
+    "publicTexts": true
+  },
+  "content": {
+    "src/content.ts": "9a73b692633eb6616dc561d163e62039bdb9172cccf598e3b720f21bbd235dc5"
+  },
+  "assets": [
+    {
+      "path": "public/photos/01.jpeg",
+      "kind": "photo",
+      "bytes": 73613,
+      "sha256": "a0c1073b650cc4d73028bb0c585530c8d8bbff74adb9cff73b5091527ba6fc88",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/02.jpeg",
+      "kind": "photo",
+      "bytes": 76671,
+      "sha256": "0375db4749cbafbfd132b33b83f566ede1b237871d72cfe2fcac47aeedc0ff1e",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/03.jpeg",
+      "kind": "photo",
+      "bytes": 53522,
+      "sha256": "05180cd5733a562a181517777e64ac11834ccd9e48ba24708b34d07c47e04f30",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/04.jpeg",
+      "kind": "photo",
+      "bytes": 66930,
+      "sha256": "b1502666186e5ad52b9017863dd6e99e55f8e0f003891c5cef9ea4da38dcbee3",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/05.jpeg",
+      "kind": "photo",
+      "bytes": 124390,
+      "sha256": "32783fe0f9c6951489402809bf7b82cfabe69b0e1b84291aa1476ae706a1126f",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/06.jpeg",
+      "kind": "photo",
+      "bytes": 121126,
+      "sha256": "a5e0edf07ce89e712a1c667dd467c5a0ed0f7765e1249165a6163201b8f6aefe",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/07.jpeg",
+      "kind": "photo",
+      "bytes": 275607,
+      "sha256": "95b36ed640dda0466b98060423ddea6b6cc6ed413a3c4c8853655a3b09d5cf54",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/08.jpeg",
+      "kind": "photo",
+      "bytes": 61491,
+      "sha256": "3de02aba20630d6ede9c7d4d0358cb57058419f99e2d0f2f5676607fed5c6b8e",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/09.jpeg",
+      "kind": "photo",
+      "bytes": 151833,
+      "sha256": "1d8a2c05dc2e42b882c1be9926e82818c57da539e44d10175f3e00d5a34c7365",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/10.jpeg",
+      "kind": "photo",
+      "bytes": 101368,
+      "sha256": "55003a1d255bc5b2d827e8110ee96e87ee9e94de15ae6163ca42e1c2ca1de051",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/photos/Mi flor más bonita.jpeg",
+      "kind": "photo",
+      "bytes": 100352,
+      "sha256": "2a2107eee6296d7305bb062fa712da47d74ea677dc3aa529d0218edf5796eb7d",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    },
+    {
+      "path": "public/audio/cancion-aniversario.mp4",
+      "kind": "audio",
+      "bytes": 3356758,
+      "sha256": "4ca63ddb60dbfbaffe84c729dafa349ae4045dc1c348b4404b4fbb1ffd4423a1",
+      "publicationApproved": true,
+      "rightsConfirmed": true
+    }
+  ]
+}

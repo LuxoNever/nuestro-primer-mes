@@ -1,0 +1,40 @@
+{
+  "name": "nuestro-primer-mes",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint src tests vite.config.ts playwright.config.ts --deny-warnings scripts/check-publication.mjs scripts/publication-guard.test.mjs",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "preview": "vite preview",
+    "demo": "node scripts/capture-demo.mjs",
+    "demo:intro": "node scripts/capture-intro.mjs",
+    "typecheck": "tsc -b",
+    "publication": "node scripts/check-publication.mjs",
+    "publication:audit": "node scripts/check-publication.mjs --audit --dist",
+    "publication:check": "node scripts/check-publication.mjs --dist",
+    "publication:test": "node --test scripts/publication-guard.test.mjs"
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@gsap/react": "^2.1.2",
+    "gsap": "^3.15.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "oxlint": "^1.88.0",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.4"
+  }
+}

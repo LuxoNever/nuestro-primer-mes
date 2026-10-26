@@ -1,0 +1,31 @@
+.letter-page-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--muted); }
+.letter-page-meta .letter-date { text-align: left; }
+.letter-page-count { font-size: 11px; white-space: nowrap; letter-spacing: .4px; }
+.letter-progress { display: block; appearance: none; -webkit-appearance: none; width: 100%; height: 3px; border: 0; margin: 16px 0 27px; background: #eadfeb; color: #b18cbc; border-radius: 2px; }
+.letter-progress::-webkit-progress-bar { background: #eadfeb; border-radius: 2px; }
+.letter-progress::-webkit-progress-value { background: #b18cbc; border-radius: 2px; }
+.letter-progress::-moz-progress-bar { background: #b18cbc; border-radius: 2px; }
+.letter-paper .letter-greeting { font: italic 42px/1.2 var(--serif); margin: 0 0 24px; }
+.letter-paper .letter-chapter-title { font-size: clamp(1.65rem, 3vw, 2rem); font-style: italic; line-height: 1.2; margin: 0 0 26px; letter-spacing: -.025em; }
+.letter-chapter-title:focus-visible { outline: 2px solid #805193; outline-offset: 6px; }
+.letter-chapter-content { min-width: 0; }
+.letter-chapter-content .letter-paragraph:last-child { margin-bottom: 0; }
+.letter-paper .letter-closing { padding-right: 0; margin-bottom: 0; }
+.letter-signature-wrap { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; max-width: 100%; }
+.letter-paper .letter-heart { display: inline-block; position: static; font-size: 30px; line-height: 1; }
+.letter-pagination { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 25px; margin-top: 30px; border-top: 1px solid var(--line); }
+.letter-page-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 10px 16px; background: transparent; border: 1px solid #cbb6d0; border-radius: 4px; font-size: 13px; }
+.letter-page-next { margin-left: auto; background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.letter-page-button:hover:not(:disabled) { background: #eee0f1; }
+.letter-page-next:hover:not(:disabled) { background: #6a497c; }
+.letter-page-button:disabled { opacity: .55; }
+.letter-announcement { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 500px) {
+  .letter-paper .letter-greeting { font-size: 37px; }
+  .letter-page-meta .letter-date { letter-spacing: 1px; font-size: 10px; }
+  .letter-page-count { font-size: 10px; }
+  .letter-page-button { padding: 10px 12px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .letter-page-button { transition: none; }
+}

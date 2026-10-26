@@ -1,0 +1,115 @@
+.special-moment {
+  display: grid;
+  gap: 44px;
+  padding-top: 90px;
+  padding-bottom: 100px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  align-items: center;
+}
+.special-visual {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  padding: 24px 22px 28px;
+  perspective: 1000px;
+}
+.special-visual::before {
+  content: "";
+  position: absolute;
+  inset: 7% 2% 2%;
+  background: radial-gradient(ellipse, #eadcf0 0, #f5eaf14d 52%, transparent 72%);
+  z-index: -1;
+}
+.special-moment .special-frame {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-height: 0;
+  margin: 0;
+  max-width: none;
+  padding: 10px 10px 0;
+  background: #fffdfb;
+  border: 1px solid #e5d8e4;
+  outline: 0;
+  transform: rotate(-0.8deg);
+  box-shadow: 0 22px 48px #543a6514, 0 3px 8px #543a6508;
+}
+.special-photo {
+  aspect-ratio: 1;
+  background: #f2e9f1;
+}
+.special-moment .special-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* The complete original photograph, without a crop, filter or overlay. */
+}
+.special-frame figcaption {
+  padding: 17px 4px 19px;
+  text-align: center;
+  color: var(--muted);
+  font: italic clamp(16px, 2.1vw, 20px) var(--serif);
+}
+.special-placeholder {
+  display: grid;
+  place-content: center;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+}
+.special-placeholder span { font: 45px var(--serif); }
+.special-placeholder p { margin: 14px 0 0; color: var(--muted); }
+.special-botanical {
+  position: absolute;
+  z-index: 0;
+  width: 105px;
+  bottom: 5px;
+  pointer-events: none;
+  transform-origin: 50% 100%;
+}
+.special-botanical-left { left: -8px; transform: translateX(-18px) rotate(-7deg); }
+.special-botanical-right { right: -8px; transform: translateX(18px) rotate(7deg); }
+.special-copy { min-width: 0; padding: 0 4px; }
+.special-copy > .eyebrow { margin-bottom: 20px; color: var(--ink); font-size: 12px; letter-spacing: 2.3px; }
+.special-moment h2 {
+  max-width: 370px;
+  font-size: clamp(3.5rem, 6.3vw, 5.6rem);
+  line-height: 0.97;
+  font-style: italic;
+  letter-spacing: -0.04em;
+  margin-bottom: 26px;
+}
+.special-rule { display: block; width: 55px; height: 1px; background: #c8a2c8; margin-bottom: 28px; }
+.special-dedication { max-width: 390px; }
+.special-dedication p { font-size: 16px; line-height: 1.95; margin-bottom: 17px; }
+.special-dedication p:first-child { font: 25px/1.45 var(--serif); }
+.special-signature { margin-top: 30px; }
+.special-signature p { font-size: 11px; color: var(--muted); margin: 0 0 6px; }
+.special-signature > span { font: italic 27px/1.2 var(--serif); }
+.special-heart-action { position: relative; display: flex; align-items: center; gap: 14px; margin-top: 30px; min-height: 48px; }
+.special-heart { flex: 0 0 48px; width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid #cfb7d3; border-radius: 50%; background: #f6edf5; }
+.special-heart-icon { width: 22px; height: 22px; fill: transparent; stroke: #82568e; stroke-width: 1.4; }
+.special-heart.is-sent .special-heart-icon { fill: #c8a2c8; }
+.special-heart:hover { background: #eddef1; }
+.special-heart-note { max-width: 220px; font-size: 11px; line-height: 1.7; color: var(--muted); }
+.special-heart-burst { position: absolute; pointer-events: none; overflow: hidden; left: -16px; top: -108px; width: 180px; height: 164px; }
+.special-petal { position: absolute; left: 36px; top: 126px; width: 11px; height: 17px; border-radius: 70% 18% 65% 28%; background: #c8a2c8; opacity: 0; }
+.special-petal:nth-child(3n) { background: #e5c9e8; }
+.special-petal:nth-child(3n + 1) { background: #c49acb; }
+@media (min-width: 760px) {
+  .special-moment { grid-template-columns: 1.12fr 1fr; gap: clamp(45px, 5vw, 90px); padding-top: 100px; padding-bottom: 110px; }
+  .special-copy { padding: 8px 0; }
+}
+@media (max-width: 759px) {
+  .special-moment { gap: 30px; padding-top: 56px; padding-bottom: 70px; }
+  .special-visual { width: 100%; max-width: 490px; justify-self: center; }
+  .special-copy { width: 100%; max-width: 460px; justify-self: center; padding: 0 10px; }
+  .special-moment h2 { max-width: 300px; }
+  .special-botanical { width: 70px; }
+  .special-botanical-left { left: 28px; }
+  .special-botanical-right { right: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .special-heart { transition: none; }
+}
